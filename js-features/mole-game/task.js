@@ -1,10 +1,18 @@
 const currentHits = document.getElementById('dead');
 const currentMiss = document.getElementById('lost');
-
-const getHole = index => document.getElementById(`hole${index}`);
-for(let holeIndex = 1; holeIndex < 10; holeIndex++){
     let counterHit = 0;
     let counterMiss = 0;
+const getHole = index => document.getElementById(`hole${index}`);
+
+const resetGame = () => {
+    counterHit = 0;
+    counterMiss = 0;
+    currentHits.textContent = counterHit;
+    currentMiss.textContent = counterMiss;
+};
+
+for(let holeIndex = 1; holeIndex < 10; holeIndex++){
+
     let elem = getHole(holeIndex);
     elem.addEventListener('click', () => {
         if(elem.classList.contains('hole_has-mole')){
@@ -13,18 +21,19 @@ for(let holeIndex = 1; holeIndex < 10; holeIndex++){
         } else{
             counterMiss++;
             currentMiss.textContent = counterMiss;
-        }
+        };
 
         if(counterHit === 10){
             setTimeout (() =>{
-              alert('Win');   
+              alert('Win');
+              resetGame();   
             }, 0)
-            window.location.reload();
         } else if(counterMiss === 5){
             setTimeout (() =>{
-                alert('Lose');   
+                alert('Lose');
+                resetGame();      
               }, 0)
-            window.location.reload();
         }
-    })
-}
+    });
+    
+};
